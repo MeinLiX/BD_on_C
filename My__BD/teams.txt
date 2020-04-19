@@ -1,0 +1,11 @@
+1 NaVi Ukraine 27 2 2009
+2 Astralis Denmark 8 2 2016
+3 fnatic Sweden 23 8 2007
+4 mousesports Germany 21 11 2015
+5 G2 France 5 5 2013
+6 Liquid US 25 9 2012
+7 EG France 21 7 2018
+8 FaZe Europ 17 2 2016
+9 Thieves China 14 3 2017
+10 Vitality France 1 18 2019
+
