@@ -1,4 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+
+#ifndef SOURCE
+#define SOURCE
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,22 +18,24 @@
 #define Master_shift_file_name "Master_shift.txt" //master shift
 #define Slave_data_file_name "Slave_data.txt" //slave
 
-//slave
+struct My_date {
+	int day;
+	int month;
+	int year;
+};
+
+//slave STR
 typedef struct Slave_struct {
 	int id;
 	char firstname[LEN];
 	char lastname[LEN];
 	char nickname[LEN];
 	short deleted;
-	int MasterID;
+	int MasterKey;
 }Slave;
 
-//master
-struct My_date {
-	int day;
-	int month;
-	int year;
-};
+//master STR
+
 typedef struct Master_struct {
 	int key;
 	char name[LEN];
@@ -45,14 +50,16 @@ typedef struct Master_shift_struct {
 	short deleted;
 }Master_shift;
 
-//slave
+
+//slave FN
 void print_S(Slave* print) {
-	if (print->deleted == DontDeleted)
-		printf("\n\nid: %d, %s :%s (%s)\nMaster Key: %d\n", print->id, print->firstname, print->lastname, print->nickname , print->MasterID);
-	else if (print->deleted == TempDeleted)
-		printf("\n\nid: %d, %s :%s (%s)\n", print->id, print->firstname, print->lastname, print->nickname);
+	if (print->deleted == DontDeleted) //use Master
+		printf("\n\nid: %d, %s %s (%s)\nMaster Key: %d\n", print->id, print->firstname, print->lastname, print->nickname, print->MasterKey);
+	else if (print->deleted == TempDeleted) //unuse Master
+		printf("\n\nid: %d, %s %s (%s)\n", print->id, print->firstname, print->lastname, print->nickname);
 	else
 		printf("\n\Slave not found!\n");
+	printf("\n\t***\t***\t***\n");
 	return;
 }
 void print_S_All()
@@ -72,20 +79,122 @@ void print_S_All()
 	fclose(f);
 	return;
 }
+
 void Insert_S() {
 	printf("Creating Slave;\nEnter id, firstname, lastname, nickname:\n");
 	FILE* f = fopen(Slave_data_file_name, "rb+");
 	Slave temp;
 	scanf("%d%s%s%s", &(temp.id), &(temp.firstname), &(temp.lastname), &(temp.nickname));
 	temp.deleted = TempDeleted; // no active
+	temp.MasterKey = 0;
 	fseek(f, 0, SEEK_END);
 	fwrite(&temp, sizeof(Slave), 1, f);
 	printf("\nSuccess Insert!\n\n");
 	fclose(f);
 	return;
 }
+void Update_S()
+{
+	printf("\nUpdating Slave;\nEnter Slave ID:\n");
+	FILE* f_s = fopen(Slave_data_file_name, "rb");
+	int id;
+	scanf("%d", &id);
+	Slave temp_s;
+	int Slave_Shift;
+	bool flag = 0;
+	while (!feof(f_s))
+	{
+		fread(&temp_s, sizeof(Slave), 1, f_s);
+		if (temp_s.id == id)
+		{
+			flag = 1;
+			Slave_Shift = ftell(f_s) / sizeof(Slave);
+			break;
+		}
+	}
+	fclose(f_s);
+	if (!flag)
+	{
+		printf("Slave don't found!\n");
+		return;
+	}
+	Slave scan;
+	printf("\nEnter First Name (0 if don't change):");
+	scanf("%s", &(scan.firstname));
+	printf("\nEnter Last Name (0 if don't change):");
+	scanf("%s", &(scan.lastname));
+	printf("\nEnter Nickname (0 if don't change):");
+	scanf("%s", &(scan.nickname));
+	if (strcmp(scan.firstname, "0"))
+	{
+		strcpy(temp_s.firstname, scan.firstname);
+	}
+	if (strcmp(scan.lastname, "0"))
+	{
+		strcpy(temp_s.lastname, scan.lastname);
+	}
+	if (strcmp(scan.nickname, "0"))
+	{
+		strcpy(temp_s.nickname, scan.nickname);
+	}
+	FILE* fw = fopen(Slave_data_file_name, "rb+");
+	fseek(fw, sizeof(Slave) * (Slave_Shift - 1), 1, SEEK_SET);
+	fwrite(&temp_s, sizeof(Slave), 1, fw);
+	print_S(&temp_s);
+	printf("Success Update!\n");
+	fclose(fw);
+	return;
+}
 
-//master
+Slave Get_S(int id_) {
+	FILE* f = fopen(Slave_data_file_name, "rb");
+	Slave res;
+	bool flag = 0;
+	while (!feof(f))
+	{
+		fread(&res, sizeof(Slave), 1, f);
+		if (res.id == id_)
+		{
+			flag = true;
+			break;
+		}
+	}
+	if (!flag)
+	{
+		res.id = -1;
+		res.deleted = TotalDeleted;
+		return res;
+	}
+	return res;
+}
+void Get_Print_S() {
+	printf("\nGet(print) Master;\nEnter Master key:");
+	int id_;
+	scanf("%d", &id_);
+	FILE* f = fopen(Slave_data_file_name, "rb");
+	Slave res;
+	bool flag = 0;
+	while (!feof(f))
+	{
+		fread(&res, sizeof(Slave), 1, f);
+		if (res.id == id_)
+		{
+			flag = true;
+			break;
+		}
+	}
+	if (!flag)
+	{
+		res.id = -1;
+		res.deleted = TotalDeleted;
+		print_S(&res);
+
+	}
+	print_S(&res);
+	return;
+}
+
+//master FN
 void shift_update(Master* temp)
 {
 	FILE* f_s = fopen(Master_shift_file_name, "rb+");
@@ -194,7 +303,7 @@ void Delete_M_temp()
 	fclose(fw);
 	return;
 }
-void Recovery_M() 
+void Recovery_M()
 {
 	printf("\nRecover Master;\nEnter Master key:");
 	int key_;
@@ -232,15 +341,25 @@ void Recovery_M()
 
 void print_M(Master* print)
 {
-	if (print->deleted == DontDeleted)
-		printf("\n\nKey:%d, Name:%s, Country:%s, Foundation date: %d.%d.%d\nStatus: Active!\n", print->key, print->name, print->country, print->date.day, print->date.month, print->date.year);
+	if (print->deleted == DontDeleted) {
+		printf("\n\nKey:%d, Name:%s, Country:%s, Foundation date: %d.%d.%d\n", print->key, print->name, print->country, print->date.day, print->date.month, print->date.year);
+		for (int q = 0; q < MAXSlavesINorg; q++) {
+			if (print->Slaves[q]) {
+				Slave temp_slave = Get_S(print->Slaves[q]);
+				if (temp_slave.MasterKey == print->key)
+					printf("Slave \"$s\" {%d}\n", temp_slave.nickname, temp_slave.id);
+			}
+		}
+		printf("Status: Active!\n");
+	}
 	else if (print->deleted == TempDeleted)
 		printf("\nKey:%d, Name:%s\nStatus: temporary Deleted!\n", print->key, print->name);
 	else
 		printf("\n\nMaster not found!\n");
+	printf("\n\t***\t***\t***\n");
 	return;
 }
-void print_M_Sift(Master_shift* print) 
+void print_M_Sift(Master_shift* print)
 {
 	if (print->deleted == DontDeleted)
 		printf("\n\nKey:%d, Adress:%d\nStatus: Active!\n", print->key, print->address);
@@ -248,6 +367,7 @@ void print_M_Sift(Master_shift* print)
 		printf("\n\nKey:%d, Adress:%d\nStatus: temporary Deleted!\n", print->key, print->address);
 	else
 		printf("\n\nMaster_shift not found!\n");
+	printf("\n\t***\t***\t***\n");
 	return;
 }
 void print_M_All()
@@ -405,7 +525,7 @@ Master Get_M(int key_) {
 	fclose(f);
 	return temp;
 }
-void Print_M() {
+void Get_Print_M() {
 	printf("\nGet(print) Master;\nEnter Master key:");
 	FILE* f_s = fopen(Master_shift_file_name, "rb");
 	int key_;
@@ -442,35 +562,225 @@ void Print_M() {
 	return;
 }
 
+//master and slave FN
+void Add_S_to_M(int key_M, int id_S) {
+	FILE* f_shift = fopen(Master_shift_file_name, "rb"); //master_shift search by key
+	Master_shift temp_sift;
+	bool flag = 0;
+	while (!feof(f_shift))
+	{
+		fread(&temp_sift, sizeof(Master_shift), 1, f_shift);
+		if (temp_sift.key == key_M)
+		{
+			flag = 1;
+			break;
+		}
+	}
+	if (!flag)
+	{
+		printf("Master don't found!\n");
+		return;
+	}
+	fclose(f_shift);
+
+	FILE* f_slave = fopen(Slave_data_file_name, "rb"); //slave search by key
+	Slave temp_slave;
+	int Slave_Shift;
+	flag = 0;
+	while (!feof(f_slave))
+	{
+		fread(&temp_slave, sizeof(Slave), 1, f_slave);
+		if (temp_slave.id == key_M)
+		{
+			flag = 1;
+			Slave_Shift = ftell(f_slave) / sizeof(Slave);
+			break;
+		}
+	}
+	fclose(f_slave);
+	if (!flag)
+	{
+		printf("Slave don't found!\n");
+		return;
+	}
+	if (temp_slave.deleted == DontDeleted) {
+		printf("Slave already in Master!\n");
+		return;
+	}
+
+
+	FILE* f = fopen(Master_data_file_name, "rb");
+	Master temp_M;
+	fseek(f, sizeof(Master) * (temp_sift.address - 1), 1, SEEK_SET);
+	fread(&temp_M, sizeof(Master), 1, f);
+	fclose(f);
+
+	flag = 0;
+	for (int q = 0; q < MAXSlavesINorg; q++) {
+		if (temp_M.Slaves[q] == 0) {
+			temp_M.Slaves[q] == temp_slave.id;
+			flag = true;
+			break;
+		}
+	}
+	if (!flag) {
+		printf("Master have max Slave's!\n");
+		return;
+	}
+	temp_slave.deleted = DontDeleted;
+	temp_slave.MasterKey = temp_M.key;
+
+	FILE* f_slave_w = fopen(Slave_data_file_name, "rb+");
+	fseek(f_slave_w, sizeof(Slave) * (Slave_Shift - 1), 1, SEEK_SET);
+	fwrite(&temp_slave, sizeof(Slave), 1, f_slave_w);
+	fclose(f_slave_w);
+
+
+	//here push new temp
+	FILE* f_master_w = fopen(Master_data_file_name, "rb+");
+	fseek(f_master_w, sizeof(Master) * (temp_sift.address - 1), 1, SEEK_SET);
+	fwrite(&temp_M, sizeof(Master), 1, f_master_w);
+	fclose(f_master_w);
+
+	print_M(&temp_M);
+	printf("\nSlave %s (id: %d) added to Master %s (key: %d)!\n", temp_slave.nickname, temp_slave.id, temp_M.name, temp_M.key);
+	return;
+}
+void Remove_S_from_M(int key_M, int id_S) {
+	FILE* f_shift = fopen(Master_shift_file_name, "rb"); //master_shift search by key
+	Master_shift temp_sift;
+	bool flag = 0;
+	while (!feof(f_shift))
+	{
+		fread(&temp_sift, sizeof(Master_shift), 1, f_shift);
+		if (temp_sift.key == key_M)
+		{
+			flag = 1;
+			break;
+		}
+	}
+	if (!flag)
+	{
+		printf("Master don't found!\n");
+		return;
+	}
+	fclose(f_shift);
+
+	FILE* f_slave = fopen(Slave_data_file_name, "rb"); //slave search by key
+	Slave temp_slave;
+	int Slave_Shift;
+	flag = 0;
+	while (!feof(f_slave))
+	{
+		fread(&temp_slave, sizeof(Slave), 1, f_slave);
+		if (temp_slave.id == key_M)
+		{
+			flag = 1;
+			Slave_Shift = ftell(f_slave) / sizeof(Slave);
+			break;
+		}
+	}
+	fclose(f_slave);
+	if (!flag)
+	{
+		printf("Slave don't found!\n");
+		return;
+	}
+	if (temp_slave.deleted == TempDeleted) {
+		printf("Slave don't used Master!\n");
+		return;
+	}
+
+
+	FILE* f = fopen(Master_data_file_name, "rb");
+	Master temp_M;
+	fseek(f, sizeof(Master) * (temp_sift.address - 1), 1, SEEK_SET);
+	fread(&temp_M, sizeof(Master), 1, f);
+	fclose(f);
+	//here changes temp
+	flag = 0;
+	for (int q = 0; q < MAXSlavesINorg; q++) {
+		if (temp_M.Slaves[q] = temp_slave.id) {
+			temp_M.Slaves[q] = 0;
+			flag = true;
+			break;
+		}
+	}
+	if (!flag) {
+		printf("No Slave was found in Master by this ID!\n");
+		return;
+	}
+	temp_slave.deleted = TempDeleted;
+
+	FILE* f_slave_w = fopen(Slave_data_file_name, "rb+");
+	fseek(f_slave_w, sizeof(Slave) * (Slave_Shift - 1), 1, SEEK_SET);
+	fwrite(&temp_slave, sizeof(Slave), 1, f_slave_w);
+	fclose(f_slave_w);
+
+
+	//here push new temp
+	FILE* fw = fopen(Master_data_file_name, "rb+");
+	fseek(fw, sizeof(Master) * (temp_sift.address - 1), 1, SEEK_SET);
+	fwrite(&temp_M, sizeof(Master), 1, fw);
+	print_M(&temp_M);
+	printf("\nSlave %s (id: %d) removed from Master %s (key: %d)!\n", temp_slave.nickname, temp_slave.id, temp_M.name, temp_M.key);
+	fclose(fw);
+	return;
+}
+
 int main() {
 	while (1) {
-		Insert_S();
-		Insert_S();
-		Insert_S();
 		print_S_All();
+		Update_S();
 		system("pause");
 	}
 	return 0;
 }
 //---------------------------------------------Functional
 
-	//print_M_All(); //work +
-	//print_M_AllShift(); //work +
+//slave FN
 
-	//Insert_M();  //work + 
-	//Update_M(); //work +
+//print_S(Slave* print) //work +
+//print_S_All() //work +
 
-	//Print_M(); //work +
-	//Master My = Get_M();	//work +
-	//print_M(&My);  //work +
+//Insert_S() //work +
+//Update_S() //work +
 
-	//Delete_M_temp(); //work +
-	//Recovery_M(); //work +
+//Slave Get_S(int id_) //work +
+//Get_Print_S() //work +
 
-	//Delete_M_Perm(); //work +
+
+////master FN
+
+//shift_update(Master* temp) //work +
+//Delete_M_Perm() //work +
+
+//Delete_M_temp() //work +
+//Recovery_M() //work +
+
+//print_M(Master* print) //work +
+//print_M_Sift(Master_shift* print) //work +
+//print_M_All() //work +
+//print_M_AllShift() //work +
+
+//Insert_M() //work +
+//Update_M() //work +
+
+//Master Get_M(int key_) //work +
+//Get_Print_M() //work +
+
+
+//master and slave FN
+
+//Add_S_to_M(int key_M, int id_S) //work +
+//Remove_S_from_M(int key_M, int id_S) //work +
+
+
+	
 /*
 organisation + client.
 Master(organisation file){update insert get} and Slave (Slave file){update insert get}
 
 Slave have unique key and i can write all Slave key in Organisation array!!!
 */
+#endif

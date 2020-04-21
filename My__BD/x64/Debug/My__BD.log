@@ -1,11 +1,23 @@
 ﻿  Source.c
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(55,10): warning C4129: 'S': unrecognized character escape sequence
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(341,61): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(371,62): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(392,23): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(393,26): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(403,61): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(426,23): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(427,26): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(438,61): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(61,10): warning C4129: 'S': unrecognized character escape sequence
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(141,58): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(350,13): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'char *'
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(350,13): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'char *'
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(350,67): warning C4474: 'printf' : too many arguments passed for format string
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(350,67): message : placeholders and their parameters expect 1 variadic arguments, but 2 were provided
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(461,61): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(491,62): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(512,23): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(513,26): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(523,61): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(546,23): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(547,26): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(558,61): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(614,64): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(621,21): warning C4553: '==': result of expression not used; did you intend '='?
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(634,65): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(641,73): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(697,64): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(716,65): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(723,65): warning C4020: 'fseek': too many actual parameters
   My__BD.vcxproj -> Y:\RiXi\project\source\labs 2ks\BD\My__BD\x64\Debug\My__BD.exe
