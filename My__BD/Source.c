@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define SPACE printf("\nNEXT COMMAND\n")
+
 #define DontDeleted 0
 #define TempDeleted 1
 #define TotalDeleted 2
@@ -58,7 +60,7 @@ void print_S(Slave* print) {
 	else if (print->deleted == TempDeleted) //unuse Master
 		printf("\n\nid: %d, %s %s (%s)\n", print->id, print->firstname, print->lastname, print->nickname);
 	else
-		printf("\n\Slave not found!\n");
+		printf("\nSlave not found!\n");
 	printf("\n\t***\t***\t***\n");
 	return;
 }
@@ -292,6 +294,9 @@ void Delete_M_Perm()
 	{
 		if (arr[j].deleted == TotalDeleted)
 		{
+			for (int q = 0; q < 5; q++) 
+				False_S(arr[j].Slaves[q]);
+			
 			shift_update(&arr[j]);
 			continue;
 		}
@@ -378,7 +383,6 @@ void print_M(Master* print)
 		for (int q = 0; q < MAXSlavesINorg; q++) {
 			if (print->Slaves[q]) {
 				Slave temp_slave = Get_S(print->Slaves[q]);
-				if (temp_slave.MasterKey == print->key)
 					printf("Slave \"$s\" {%d}\n", temp_slave.nickname, temp_slave.id);
 			}
 		}
@@ -650,7 +654,7 @@ void Add_S_to_M(int key_M, int id_S) {
 	flag = 0;
 	for (int q = 0; q < MAXSlavesINorg; q++) {
 		if (temp_M.Slaves[q] == 0) {
-			temp_M.Slaves[q] == temp_slave.id;
+			temp_M.Slaves[q] = temp_slave.id;
 			flag = true;
 			break;
 		}
@@ -731,7 +735,7 @@ void Remove_S_from_M(int key_M, int id_S) {
 	//here changes temp
 	flag = 0;
 	for (int q = 0; q < MAXSlavesINorg; q++) {
-		if (temp_M.Slaves[q] = temp_slave.id) {
+		if (temp_M.Slaves[q] == temp_slave.id) {
 			temp_M.Slaves[q] = 0;
 			flag = true;
 			break;
@@ -760,13 +764,34 @@ void Remove_S_from_M(int key_M, int id_S) {
 
 int main() {
 	while (1) {
+		Get_Print_M();
 		print_S_All();
-		Update_S();
+		Add_S_to_M(1,1);
 		system("pause");
 	}
 	return 0;
 }
+
+/*
+1) Заздалегідь введіть 2 чи 3 master records з slave records у деяких  master records;
+2) показати списки обох типів записів;
+3) додати 1 master record і 2 slave records;
+4) вилучити 1 master record з тих, що були раніше;
+5) показати списки обох типів записів;
+6) оновити значення неключового поля в master record, яка була введена на 3)кроці;
+7) показати результат оновлення;
+8) вилучити 1 slave record(будь-яку);
+9) показати списки обох типів записів.
+*/
+
+
 //---------------------------------------------Functional
+
+//master and slave FN
+
+//Add_S_to_M(int key_M, int id_S) //work +
+//Remove_S_from_M(int key_M, int id_S) //work +
+
 
 //slave FN
 
@@ -799,11 +824,6 @@ int main() {
 //Master Get_M(int key_) //work +
 //Get_Print_M() //work +
 
-
-//master and slave FN
-
-//Add_S_to_M(int key_M, int id_S) //work +
-//Remove_S_from_M(int key_M, int id_S) //work +
 
 
 	
