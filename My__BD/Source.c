@@ -145,6 +145,38 @@ void Update_S()
 	fclose(fw);
 	return;
 }
+void False_S(int id_) {
+	FILE* f_s = fopen(Slave_data_file_name, "rb");
+	Slave temp_s;
+	int Slave_Shift;
+	bool flag = 0;
+	while (!feof(f_s))
+	{
+		fread(&temp_s, sizeof(Slave), 1, f_s);
+		if (temp_s.id == id_)
+		{
+			flag = 1;
+			Slave_Shift = ftell(f_s) / sizeof(Slave);
+			break;
+		}
+	}
+	fclose(f_s);
+	if (!flag)
+	{
+		printf("Slave don't found!\n");
+		return;
+	}
+	temp_s.deleted = TempDeleted;
+
+	FILE* fw = fopen(Slave_data_file_name, "rb+");
+	fseek(fw, sizeof(Slave) * (Slave_Shift - 1), 1, SEEK_SET);
+	fwrite(&temp_s, sizeof(Slave), 1, fw);
+	print_S(&temp_s);
+	printf("Success Update!\n");
+	fclose(fw);
+	return;
+}
+
 
 Slave Get_S(int id_) {
 	FILE* f = fopen(Slave_data_file_name, "rb");
@@ -642,7 +674,6 @@ void Add_S_to_M(int key_M, int id_S) {
 	fwrite(&temp_M, sizeof(Master), 1, f_master_w);
 	fclose(f_master_w);
 
-	print_M(&temp_M);
 	printf("\nSlave %s (id: %d) added to Master %s (key: %d)!\n", temp_slave.nickname, temp_slave.id, temp_M.name, temp_M.key);
 	return;
 }
@@ -722,7 +753,6 @@ void Remove_S_from_M(int key_M, int id_S) {
 	FILE* fw = fopen(Master_data_file_name, "rb+");
 	fseek(fw, sizeof(Master) * (temp_sift.address - 1), 1, SEEK_SET);
 	fwrite(&temp_M, sizeof(Master), 1, fw);
-	print_M(&temp_M);
 	printf("\nSlave %s (id: %d) removed from Master %s (key: %d)!\n", temp_slave.nickname, temp_slave.id, temp_M.name, temp_M.key);
 	fclose(fw);
 	return;

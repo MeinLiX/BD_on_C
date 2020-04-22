@@ -17,7 +17,7 @@ Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(614,64): warning C4020
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(621,21): warning C4553: '==': result of expression not used; did you intend '='?
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(634,65): warning C4020: 'fseek': too many actual parameters
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(641,73): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(697,64): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(716,65): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(723,65): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(696,64): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(715,65): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(722,65): warning C4020: 'fseek': too many actual parameters
   My__BD.vcxproj -> Y:\RiXi\project\source\labs 2ks\BD\My__BD\x64\Debug\My__BD.exe
