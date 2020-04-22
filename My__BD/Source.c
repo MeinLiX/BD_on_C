@@ -178,7 +178,46 @@ void False_S(int id_) {
 	fclose(fw);
 	return;
 }
+void Delete_S_Perm(int id_) {
+	FILE* f_s = fopen(Slave_data_file_name, "rb+");
+	Slave arr[100];
+	fseek(f_s, 0, SEEK_SET);
+	int i;
+	short shifts = 0;
+	for (i = 1; !feof(f_s); i++)
+	{
+		fread(&arr[i], sizeof(Slave), 1, f_s);
+		if (arr[i].id == id_) {
+			if (arr[i].deleted == DontDeleted) {
+				fclose(f_s);
+				printf("This Slave is used in Master");
+				return;
+			}
+			shifts = true;
+			arr[i].deleted = TotalDeleted;
+		}
+	}
+	arr[i - 1].id = -1;
+	fclose(f_s);
+	if (!shifts)
+	{
+		printf("Slave id don't found");
+		return;
+	}
+	FILE* fw = fopen(Slave_data_file_name, "wb");
+	fseek(fw, 0, SEEK_SET);
+	for (int j = 1; arr[j].id != -1; j++)
+	{
+		if (arr[j].deleted == TotalDeleted) {
+			printf("Slave %s {%d} Deleted.", arr[j].nickname, arr[j].id);
+			continue;
+		}
+		fwrite(&arr[j], sizeof(Slave), 1, fw);
+	}
 
+
+	fclose(fw);
+}
 
 Slave Get_S(int id_) {
 	FILE* f = fopen(Slave_data_file_name, "rb");
@@ -294,9 +333,9 @@ void Delete_M_Perm()
 	{
 		if (arr[j].deleted == TotalDeleted)
 		{
-			for (int q = 0; q < 5; q++) 
+			for (int q = 0; q < 5; q++)
 				False_S(arr[j].Slaves[q]);
-			
+
 			shift_update(&arr[j]);
 			continue;
 		}
@@ -383,7 +422,7 @@ void print_M(Master* print)
 		for (int q = 0; q < MAXSlavesINorg; q++) {
 			if (print->Slaves[q]) {
 				Slave temp_slave = Get_S(print->Slaves[q]);
-					printf("Slave \"%s\" {%d}\n", temp_slave.nickname, temp_slave.id);
+				printf("Slave \"%s\" {%d}\n", temp_slave.nickname, temp_slave.id);
 			}
 		}
 		printf("Status: Active!\n");
@@ -764,6 +803,8 @@ void Remove_S_from_M(int key_M, int id_S) {
 
 int main() {
 	while (1) {
+		print_S_All();
+		print_M_All();
 		system("pause");
 	}
 	return 0;
@@ -771,19 +812,32 @@ int main() {
 
 /*
 1) Заздалегідь введіть 2 чи 3 master records з slave records у деяких  master records;
-Add_S_to_M(1, 1);
+		Add_S_to_M(1, 1);
 		Add_S_to_M(1, 2);
 		Add_S_to_M(2, 3);
 		Add_S_to_M(3, 4);
 		Add_S_to_M(3, 5);
 2) показати списки обох типів записів;
+		print_S_All();
+		print_M_All();
 3) додати 1 master record і 2 slave records;
+		Insert_M();
+		Insert_S();
+		Insert_S();
 4) вилучити 1 master record з тих, що були раніше;
+		Delete_M_Perm();
 5) показати списки обох типів записів;
+		print_S_All();
+		print_M_All();
 6) оновити значення неключового поля в master record, яка була введена на 3)кроці;
+		Update_M();
 7) показати результат оновлення;
+		Get_Print_M();
 8) вилучити 1 slave record(будь-яку);
+		Delete_S_Perm(int id_);
 9) показати списки обох типів записів.
+		print_S_All();
+		print_M_All();
 */
 
 
@@ -805,7 +859,11 @@ Add_S_to_M(1, 1);
 
 //Slave Get_S(int id_) //work +
 //Get_Print_S() //work +
+//False_S() //work +
+//Delete_S_Perm(int id_) //work +
 
+// Get_S(int id_) //work +
+// Get_Print_S() //work +
 
 ////master FN
 
@@ -828,7 +886,7 @@ Add_S_to_M(1, 1);
 
 
 
-	
+
 /*
 organisation + client.
 Master(organisation file){update insert get} and Slave (Slave file){update insert get}
