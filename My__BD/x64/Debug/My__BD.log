@@ -1,11 +1,6 @@
 ﻿  Source.c
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(63,10): warning C4129: 'S': unrecognized character escape sequence
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(143,58): warning C4020: 'fseek': too many actual parameters
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(174,58): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(386,13): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'char *'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(386,13): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'char *'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(386,67): warning C4474: 'printf' : too many arguments passed for format string
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(386,67): message : placeholders and their parameters expect 1 variadic arguments, but 2 were provided
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(497,61): warning C4020: 'fseek': too many actual parameters
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(527,62): warning C4020: 'fseek': too many actual parameters
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(548,23): warning C4305: '=': truncation from 'int' to 'char'
@@ -15,7 +10,6 @@ Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(582,23): warning C4305
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(583,26): warning C4305: '=': truncation from 'int' to 'char'
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(594,61): warning C4020: 'fseek': too many actual parameters
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(650,64): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(657,21): warning C4553: '==': result of expression not used; did you intend '='?
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(670,65): warning C4020: 'fseek': too many actual parameters
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(677,73): warning C4020: 'fseek': too many actual parameters
 Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(732,64): warning C4020: 'fseek': too many actual parameters

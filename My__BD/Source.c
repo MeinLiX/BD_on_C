@@ -383,7 +383,7 @@ void print_M(Master* print)
 		for (int q = 0; q < MAXSlavesINorg; q++) {
 			if (print->Slaves[q]) {
 				Slave temp_slave = Get_S(print->Slaves[q]);
-					printf("Slave \"$s\" {%d}\n", temp_slave.nickname, temp_slave.id);
+					printf("Slave \"%s\" {%d}\n", temp_slave.nickname, temp_slave.id);
 			}
 		}
 		printf("Status: Active!\n");
@@ -626,7 +626,7 @@ void Add_S_to_M(int key_M, int id_S) {
 	while (!feof(f_slave))
 	{
 		fread(&temp_slave, sizeof(Slave), 1, f_slave);
-		if (temp_slave.id == key_M)
+		if (temp_slave.id == id_S)
 		{
 			flag = 1;
 			Slave_Shift = ftell(f_slave) / sizeof(Slave);
@@ -708,7 +708,7 @@ void Remove_S_from_M(int key_M, int id_S) {
 	while (!feof(f_slave))
 	{
 		fread(&temp_slave, sizeof(Slave), 1, f_slave);
-		if (temp_slave.id == key_M)
+		if (temp_slave.id == id_S)
 		{
 			flag = 1;
 			Slave_Shift = ftell(f_slave) / sizeof(Slave);
@@ -764,9 +764,6 @@ void Remove_S_from_M(int key_M, int id_S) {
 
 int main() {
 	while (1) {
-		Get_Print_M();
-		print_S_All();
-		Add_S_to_M(1,1);
 		system("pause");
 	}
 	return 0;
@@ -774,6 +771,11 @@ int main() {
 
 /*
 1) Заздалегідь введіть 2 чи 3 master records з slave records у деяких  master records;
+Add_S_to_M(1, 1);
+		Add_S_to_M(1, 2);
+		Add_S_to_M(2, 3);
+		Add_S_to_M(3, 4);
+		Add_S_to_M(3, 5);
 2) показати списки обох типів записів;
 3) додати 1 master record і 2 slave records;
 4) вилучити 1 master record з тих, що були раніше;
