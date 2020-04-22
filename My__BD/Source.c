@@ -812,11 +812,13 @@ int main() {
 
 /*
 1) Заздалегідь введіть 2 чи 3 master records з slave records у деяких  master records;
-		Add_S_to_M(1, 1);
-		Add_S_to_M(1, 2);
-		Add_S_to_M(2, 3);
-		Add_S_to_M(3, 4);
-		Add_S_to_M(3, 5);
+	Insert_S(); //loop for SLAVE
+	Insert_M(); //loop for MASTER
+		Add_S_to_M(1, 1); //maste key, slave id
+		Add_S_to_M(1, 2); //maste key, slave id
+		Add_S_to_M(2, 3); //maste key, slave id
+		Add_S_to_M(3, 4); //maste key, slave id
+		Add_S_to_M(3, 5); //maste key, slave id
 2) показати списки обох типів записів;
 		print_S_All();
 		print_M_All();
@@ -834,7 +836,7 @@ int main() {
 7) показати результат оновлення;
 		Get_Print_M();
 8) вилучити 1 slave record(будь-яку);
-		Delete_S_Perm(int id_);
+		Delete_S_Perm(int id_); // slave id
 9) показати списки обох типів записів.
 		print_S_All();
 		print_M_All();
