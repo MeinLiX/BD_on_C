@@ -1,18 +1,18 @@
 ﻿  Source.c
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(143,58): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(174,58): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(536,61): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(566,62): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(587,23): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(588,26): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(598,61): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(621,23): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(622,26): warning C4305: '=': truncation from 'int' to 'char'
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(633,61): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(689,64): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(709,65): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(716,73): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(771,64): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(790,65): warning C4020: 'fseek': too many actual parameters
-Y:\RiXi\project\source\labs 2ks\BD\My__BD\My__BD\Source.c(797,65): warning C4020: 'fseek': too many actual parameters
-  My__BD.vcxproj -> Y:\RiXi\project\source\labs 2ks\BD\My__BD\x64\Debug\My__BD.exe
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(143,58): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(174,58): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(536,61): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(566,62): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(587,23): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(588,26): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(598,61): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(621,23): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(622,26): warning C4305: '=': truncation from 'int' to 'char'
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(633,61): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(689,64): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(709,65): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(716,73): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(771,64): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(790,65): warning C4020: 'fseek': too many actual parameters
+Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\My__BD\Source.c(797,65): warning C4020: 'fseek': too many actual parameters
+  My__BD.vcxproj -> Y:\RiXi\project\source\repos UNIVER\labs 2ks\BD\My__BD\x64\Debug\My__BD.exe

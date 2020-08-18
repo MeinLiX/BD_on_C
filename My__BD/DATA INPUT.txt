@@ -1,8 +1,8 @@
 //MASTER
 
-1 NaVi Ukraine 27 2 2009
-2 Astralis Denmark 8 2 2016
-3 fnatic Sweden 23 8 2007
+1 NaVi Ukraine 27-2-2009
+2 Astralis Denmark 8-2-2016
+3 fnatic Sweden 23-8-2007
 4 mousesports Germany 21 11 2015
 5 G2 France 5 5 2013
 6 Liquid US 25 9 2012

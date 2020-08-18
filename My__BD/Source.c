@@ -803,8 +803,11 @@ void Remove_S_from_M(int key_M, int id_S) {
 
 int main() {
 	while (1) {
-		print_S_All();
-		print_M_All();
+		Add_S_to_M(1, 1); //maste key, slave id
+		Add_S_to_M(1, 2); //maste key, slave id
+		Add_S_to_M(2, 3); //maste key, slave id
+		Add_S_to_M(3, 4); //maste key, slave id
+		Add_S_to_M(3, 5); //maste key, slave id
 		system("pause");
 	}
 	return 0;
@@ -814,6 +817,7 @@ int main() {
 1) Заздалегідь введіть 2 чи 3 master records з slave records у деяких  master records;
 	Insert_S(); //loop for SLAVE
 	Insert_M(); //loop for MASTER
+	1.1)
 		Add_S_to_M(1, 1); //maste key, slave id
 		Add_S_to_M(1, 2); //maste key, slave id
 		Add_S_to_M(2, 3); //maste key, slave id
